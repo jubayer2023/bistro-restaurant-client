@@ -14,7 +14,6 @@ const banners = [img1, img2, img3, img4, img5, img6];
 const Banner = () => {
   return (
     <Carousel
-      autoPlay={true}
       thumbWidth={100}
       infiniteLoop={true}
       useKeyboardArrows={true}
