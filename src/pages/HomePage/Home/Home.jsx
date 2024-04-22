@@ -4,6 +4,7 @@ import BistroDesc from "../BitroDesc/BistroDesc";
 import Category from "../Category/Category";
 import Featured from "../Featured/Featured";
 import PopularItems from "../PopularItems/PopularItems";
+import Testimonial from "../Testimonials/Testimonial";
 
 const Home = () => {
   return (
@@ -40,6 +41,15 @@ const Home = () => {
         {/* our menu section */}
         <section>
           <Featured></Featured>
+        </section>
+
+        {/* testimonials section */}
+        <section>
+          <SectionTitle
+            sectionHeading={"Testimonials"}
+            sectionText={"What our client says"}
+          />
+          <Testimonial></Testimonial>
         </section>
       </div>
     </div>

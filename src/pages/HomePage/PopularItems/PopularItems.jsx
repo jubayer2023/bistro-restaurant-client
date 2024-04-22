@@ -15,11 +15,8 @@ const PopularItems = () => {
     <div className="my-12">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
         {menus.map((item) => (
-          <>
-            <div
-              key={item._id}
-              className="flex justify-between items-center gap-5"
-            >
+          <div key={item._id}>
+            <div className="flex justify-between items-center gap-5">
               <div className="w-1/3 ">
                 <img
                   className="rounded-full rounded-tl-none"
@@ -35,7 +32,7 @@ const PopularItems = () => {
                 <p className="text-sm">{item.recipe}</p>
               </div>
             </div>
-          </>
+          </div>
         ))}
       </div>
       <div className="flex justify-center items-center ">
