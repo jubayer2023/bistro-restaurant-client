@@ -2,6 +2,7 @@ import SectionTitle from "../../Shared/SectionTitle/SectionTitle";
 import Banner from "../Banner/Banner";
 import BistroDesc from "../BitroDesc/BistroDesc";
 import Category from "../Category/Category";
+import Featured from "../Featured/Featured";
 import PopularItems from "../PopularItems/PopularItems";
 
 const Home = () => {
@@ -12,7 +13,7 @@ const Home = () => {
 
       <div className="max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl mx-auto ">
         {/* Category section */}
-        <section>
+        <section className="mt-10">
           {/* heading */}
           <SectionTitle
             sectionHeading={"Order Online"}
@@ -34,6 +35,11 @@ const Home = () => {
             sectionText={"Check it out"}
           />
           <PopularItems></PopularItems>
+        </section>
+
+        {/* our menu section */}
+        <section>
+          <Featured></Featured>
         </section>
       </div>
     </div>
