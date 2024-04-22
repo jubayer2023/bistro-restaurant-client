@@ -1,4 +1,4 @@
-const Heading = ({ sectionText, sectionHeading }) => {
+const SectionTitle = ({ sectionText, sectionHeading }) => {
   return (
     <div className="max-w-screen-md mx-auto mt-20">
       <div className=" w-[250px] md:w-[300px]  mx-auto">
@@ -13,4 +13,4 @@ const Heading = ({ sectionText, sectionHeading }) => {
   );
 };
 
-export default Heading;
+export default SectionTitle;
