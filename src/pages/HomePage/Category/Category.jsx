@@ -1,6 +1,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import { Autoplay, FreeMode, Pagination } from "swiper/modules";
+import "./Category.css";
 
 // Import Swiper styles
 import "swiper/css";
@@ -40,9 +41,9 @@ const Category = () => {
   return (
     <div className="mb-20 mt-10 px-5 xl:px-0">
       <Swiper
-        style={{
-          height: "400px",
-        }}
+        // style={{
+        //   height: "400px",
+        // }}
         slidesPerView={4}
         spaceBetween={20}
         autoplay={{
@@ -73,7 +74,11 @@ const Category = () => {
       >
         {slideArray.map((slide, index) => (
           <SwiperSlide key={index}>
-            <img src={slide.img} alt="categoryImage" className="relative rounded-md" />
+            <img
+              src={slide.img}
+              alt="categoryImage"
+              className="relative rounded-md"
+            />
             <h3 className="text-sm md:text-xl uppercase text-neutral-100 text-center absolute bottom-20  bg-clip-text bg-slate-700 text-transparent left-14 md:left-10 lg:left-20">
               {slide.title}
             </h3>

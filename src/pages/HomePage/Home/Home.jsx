@@ -1,5 +1,6 @@
 import Heading from "../../Shared/Heading/Heading";
 import Banner from "../Banner/Banner";
+import BistroDesc from "../BitroDesc/BistroDesc";
 import Category from "../Category/Category";
 
 const Home = () => {
@@ -8,7 +9,7 @@ const Home = () => {
       {/* banner section */}
       <Banner></Banner>
 
-      <div className="max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl mx-auto px-5 lg:px-0">
+      <div className="max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl mx-auto ">
         {/* Category section */}
         <section>
           <Heading
@@ -16,6 +17,11 @@ const Home = () => {
             sectionText={"From 11:00am to 10:00pm"}
           ></Heading>
           <Category></Category>
+        </section>
+
+        {/* chef Service */}
+        <section className="my-24">
+          <BistroDesc></BistroDesc>
         </section>
       </div>
     </div>
