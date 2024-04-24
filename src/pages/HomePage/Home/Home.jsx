@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import SectionTitle from "../../Shared/SectionTitle/SectionTitle";
 import Banner from "../Banner/Banner";
 import BistroDesc from "../BitroDesc/BistroDesc";
@@ -9,6 +10,9 @@ import Testimonial from "../Testimonials/Testimonial";
 const Home = () => {
   return (
     <div className="">
+      <Helmet>
+        <title>Bistro Boss | Home</title>
+      </Helmet>
       {/* banner section */}
       <Banner></Banner>
 

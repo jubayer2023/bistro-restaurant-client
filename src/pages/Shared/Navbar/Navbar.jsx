@@ -15,6 +15,7 @@ const Navbar = () => {
       >
         Home
       </NavLink>
+
       <NavLink
         className={({ isActive, isPending }) =>
           isPending
@@ -23,31 +24,7 @@ const Navbar = () => {
             ? "py-2 px-2 uppercase font-semibold text-yellow-400"
             : "py-2 px-2 uppercase font-semibold text-white"
         }
-        to={"/contact"}
-      >
-        Contact Us
-      </NavLink>
-      <NavLink
-        className={({ isActive, isPending }) =>
-          isPending
-            ? "pending"
-            : isActive
-            ? "py-2 px-2 uppercase font-semibold text-yellow-400"
-            : "py-2 px-2 uppercase font-semibold text-white"
-        }
-        to={"/dashboard"}
-      >
-        Dashboard
-      </NavLink>
-      <NavLink
-        className={({ isActive, isPending }) =>
-          isPending
-            ? "pending"
-            : isActive
-            ? "py-2 px-2 uppercase font-semibold text-yellow-400"
-            : "py-2 px-2 uppercase font-semibold text-white"
-        }
-        to={"/ourMenu"}
+        to={"/menu"}
       >
         Our Menu
       </NavLink>
@@ -67,7 +44,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className="navbar fixed z-50 bg-black bg-opacity-60 px-0 pr-3 md:px-10">
+    <div className="navbar fixed z-50 bg-black bg-opacity-70 px-0 pr-3 md:px-10">
       <div className="navbar-start  w-[500px] md:w-[400px]">
         <div className="dropdown text-white">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
