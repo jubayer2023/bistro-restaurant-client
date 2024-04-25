@@ -8,8 +8,10 @@ const Menu = () => {
       <Helmet>
         <title>Bistro Boss | Menu</title>
       </Helmet>
-      {/* cover */}
+      {/* page cover */}
       <PageCover menuCover={menuCoverImage} title={"Our Menu"}></PageCover>
+
+      
     </div>
   );
 };

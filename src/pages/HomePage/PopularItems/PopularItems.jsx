@@ -1,38 +1,17 @@
-import { useEffect, useState } from "react";
+import MenuItem from "./MenuItem";
+import { useMenuHook } from "../../../hooks/useMenuHook";
 
 const PopularItems = () => {
-  const [menus, setMenus] = useState([]);
-  useEffect(() => {
-    fetch("menu.json")
-      .then((res) => res.json())
-      .then((data) => {
-        const popularItems = data.filter((item) => item.category === "popular");
-        setMenus(popularItems);
-      });
-  }, []);
+  const [menus, loading] = useMenuHook();
+  // console.log(menus, loading);
+
+  const popularItems = menus.filter((item) => item.category === "popular");
 
   return (
     <div className="my-12">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-        {menus.map((item) => (
-          <div key={item._id}>
-            <div className="flex justify-between items-center gap-5">
-              <div className="w-1/3 ">
-                <img
-                  className="rounded-full rounded-tl-none"
-                  src={item.image}
-                  alt="menuImage"
-                />
-              </div>
-              <div className="space-y-2">
-                <div className="flex justify-between items-center">
-                  <h4 className="uppercase ">{item.name}-----------------</h4>
-                  <p className="text-amber-400">${item.price}</p>
-                </div>
-                <p className="text-sm">{item.recipe}</p>
-              </div>
-            </div>
-          </div>
+        {popularItems.map((item) => (
+          <MenuItem key={item._id} item={item}></MenuItem>
         ))}
       </div>
       <div className="flex justify-center items-center ">
