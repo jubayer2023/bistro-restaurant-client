@@ -26,7 +26,7 @@ const Menu = () => {
       </Helmet>
       {/*main cover */}
       <Cover
-        menuCover={menuCoverImage}
+        coverImage={menuCoverImage}
         title={"Our Menu"}
         text={"Would you like to try a dish ?"}
       ></Cover>
@@ -44,7 +44,7 @@ const Menu = () => {
       <div className="my-16">
         <MenuCategory
           items={dessertItems}
-          title={"Dessersts"}
+          title={"Desserts"}
           text={
             "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam, consequuntur, consectetur adipisicing elit. Quisquam, consequuntur,"
           }
@@ -56,7 +56,7 @@ const Menu = () => {
       <div className="my-16">
         <MenuCategory
           items={saladItems}
-          title={"Salads"}
+          title={"Salad"}
           text={
             "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam, consequuntur, consectetur adipisicing elit. Quisquam, consequuntur,"
           }

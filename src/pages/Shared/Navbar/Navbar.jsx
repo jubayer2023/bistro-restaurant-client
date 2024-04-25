@@ -36,9 +36,9 @@ const Navbar = () => {
             ? "py-2 px-2 uppercase font-semibold text-yellow-400"
             : "py-2 px-2 uppercase font-semibold text-white"
         }
-        to={"ourShop"}
+        to={"/order/Salad"}
       >
-        Our Shop
+        Order
       </NavLink>
     </>
   );
