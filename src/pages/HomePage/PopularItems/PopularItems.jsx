@@ -2,7 +2,7 @@ import MenuItem from "./MenuItem";
 import { useMenuHook } from "../../../hooks/useMenuHook";
 
 const PopularItems = () => {
-  const [menus, loading] = useMenuHook();
+  const [menus] = useMenuHook();
   // console.log(menus, loading);
 
   const popularItems = menus.filter((item) => item.category === "popular");
