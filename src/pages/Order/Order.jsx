@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useMenuHook } from "../../hooks/useMenuHook";
 import OrderPanel from "./OrderPanel";
 import { useParams } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import "react-tabs/style/react-tabs.css";
 
 const Order = () => {
@@ -26,6 +27,9 @@ const Order = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Bistro Boss | Order Food</title>
+      </Helmet>
       {/* Order Cover */}
       <Cover
         coverImage={orderCoverImage}
