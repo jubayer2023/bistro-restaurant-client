@@ -1,14 +1,20 @@
 import { Link } from "react-router-dom";
 import loginBackground from "../../assets/others/authentication.png";
 import loginImg from "../../assets/others/authentication2.png";
+import useAuthContext from "../../hooks/useAuthContext";
 
 const SignUp = () => {
+  const { signUpUser } = useAuthContext();
+  //   console.log(signUpUser);
+
   const handleSignUp = (e) => {
     e.preventDefault();
     const form = e.target;
+    const name = form.name.value;
+    const photo = form.photo.value;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password);
+    console.log(name, photo, email, password);
   };
 
   return (
@@ -33,14 +39,32 @@ const SignUp = () => {
             <form onSubmit={handleSignUp} className="card-body w-full">
               <div className="form-control">
                 <label className="label">
+                  <span className="label-text">Name</span>
+                </label>
+                <input
+                  placeholder="name"
+                  name="name"
+                  className="input input-bordered"
+                />
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Photo</span>
+                </label>
+                <input
+                  placeholder="photo"
+                  name="photo"
+                  className="input input-bordered"
+                />
+              </div>
+              <div className="form-control">
+                <label className="label">
                   <span className="label-text">Email</span>
                 </label>
                 <input
-                  type="email"
                   placeholder="email"
                   name="email"
                   className="input input-bordered"
-                  required
                 />
               </div>
               <div className="form-control">
@@ -48,25 +72,12 @@ const SignUp = () => {
                   <span className="label-text">Password</span>
                 </label>
                 <input
-                  type="password"
                   placeholder="password"
                   name="password"
                   className="input input-bordered"
-                  required
                 />
               </div>
-              {/* captcha here */}
-              <div className="form-control  ">
-                <label className="label"></label>
-                <input
-                  type="text"
-                  placeholder="fill the above captcha"
-                  name="captcha"
-                  className="input input-bordered"
-                  required
-                />
-                <button className="btn btn-xs btn-outline ">Validate </button>
-              </div>
+
               <div className="form-control mt-6">
                 <input
                   className="btn btn-primary"
@@ -76,13 +87,16 @@ const SignUp = () => {
               </div>
             </form>
             <p className="text-center">
-                <small className="text-sm font-semibold text-amber-500">
-                  Already have an account ?{" "}
-                  <Link to={"/login"} className="cursor-pointer underline text-green-700">
-                    Login here!!
-                  </Link>
-                </small>
-              </p>
+              <small className="text-sm font-semibold text-amber-500">
+                Already have an account ?{" "}
+                <Link
+                  to={"/login"}
+                  className="cursor-pointer underline text-green-700"
+                >
+                  Login here!!
+                </Link>
+              </small>
+            </p>
           </div>
         </div>
       </div>
