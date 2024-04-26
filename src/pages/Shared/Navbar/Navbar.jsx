@@ -40,6 +40,18 @@ const Navbar = () => {
       >
         Order
       </NavLink>
+      <NavLink
+        className={({ isActive, isPending }) =>
+          isPending
+            ? "pending"
+            : isActive
+            ? "py-2 px-2 uppercase font-semibold text-yellow-400"
+            : "py-2 px-2 uppercase font-semibold text-white"
+        }
+        to={"/login"}
+      >
+        Login
+      </NavLink>
     </>
   );
 
