@@ -2,20 +2,29 @@ import { Link } from "react-router-dom";
 import loginBackground from "../../assets/others/authentication.png";
 import loginImg from "../../assets/others/authentication2.png";
 import useAuthContext from "../../hooks/useAuthContext";
+import { useForm } from "react-hook-form";
+import { useEffect } from "react";
 
 const SignUp = () => {
   const { signUpUser } = useAuthContext();
   //   console.log(signUpUser);
 
-  const handleSignUp = (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const name = form.name.value;
-    const photo = form.photo.value;
-    const email = form.email.value;
-    const password = form.password.value;
-    console.log(name, photo, email, password);
+  const {
+    register,
+    reset,
+    formState: { errors, isSubmitSuccessful },
+    handleSubmit,
+  } = useForm();
+
+  const onSubmit = async (data) => {
+    console.log(data);
   };
+
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      reset();
+    }
+  }, [isSubmitSuccessful, reset]);
 
   return (
     <div
@@ -36,46 +45,92 @@ const SignUp = () => {
           <div className="card w-3/4 lg:w-1/2">
             <h1 className="text-5xl font-bold text-center">Sign up now!</h1>
 
-            <form onSubmit={handleSignUp} className="card-body w-full">
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="card-body w-full"
+            >
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Name</span>
                 </label>
                 <input
+                  {...register("name", { required: true })}
+                  type="text"
                   placeholder="name"
                   name="name"
                   className="input input-bordered"
                 />
+                {errors.name && (
+                  <span className="text-red-600 font-semibold text-xs">
+                    *Name is required !!!
+                  </span>
+                )}
               </div>
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Photo</span>
                 </label>
                 <input
+                  {...register("photo", { required: true })}
+                  type="text"
                   placeholder="photo"
                   name="photo"
                   className="input input-bordered"
                 />
+                {errors.photo && (
+                  <span className="text-red-600 font-semibold text-xs">
+                    * Photo is required !!!
+                  </span>
+                )}
               </div>
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Email</span>
                 </label>
                 <input
+                  {...register("email", { required: true })}
+                  type="email"
                   placeholder="email"
                   name="email"
                   className="input input-bordered"
                 />
+                {errors.email && (
+                  <span className="text-red-600 font-semibold text-xs">
+                    *Email is required !!!
+                  </span>
+                )}
               </div>
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Password</span>
                 </label>
                 <input
+                  {...register("password", {
+                    required: true,
+                    minLength: 6,
+                    pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/,
+                  })}
+                  type="password"
                   placeholder="password"
                   name="password"
                   className="input input-bordered"
                 />
+                {errors.password?.type === "required" && (
+                  <span className="text-red-600 font-semibold text-xs">
+                    *Password is required !!!
+                  </span>
+                )}
+                {errors.password?.type === "minLength" && (
+                  <span className="text-red-600 font-semibold text-xs">
+                    *Password must be at least 6 characters!!!!!
+                  </span>
+                )}
+                {errors.password?.type === "pattern" && (
+                  <span className="text-red-600 font-semibold text-xs">
+                    Must contain at least one number and one uppercase and
+                    lowercase letter, and at least 8 or more characters
+                  </span>
+                )}
               </div>
 
               <div className="form-control mt-6">
@@ -87,7 +142,7 @@ const SignUp = () => {
               </div>
             </form>
             <p className="text-center">
-              <small className="text-sm font-semibold text-amber-500">
+              <small className="text-xs font-semibold text-amber-500">
                 Already have an account ?{" "}
                 <Link
                   to={"/login"}
