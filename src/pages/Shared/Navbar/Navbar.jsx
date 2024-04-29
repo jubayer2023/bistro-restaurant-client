@@ -1,7 +1,8 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import NavItems from "./NavItems";
 import useAuthContext from "../../../hooks/useAuthContext";
 import Swal from "sweetalert2";
+import { FaCartShopping } from "react-icons/fa6";
 
 const Navbar = () => {
   const { user, logOut } = useAuthContext();
@@ -79,7 +80,14 @@ const Navbar = () => {
           {""}
         </ul>
         <div className="flex justify-center items-center text-xs md:text-sm font-semibold uppercase space-x-1 text-white">
-          <p>Cart</p>
+          <p>
+            <Link to={"/"}>
+              <button className="btn btn-sm">
+                <FaCartShopping></FaCartShopping>
+                <div className="badge badge-secondary">+99</div>
+              </button>
+            </Link>
+          </p>
           {user ? (
             <NavLink
               onClick={handleLogOut}

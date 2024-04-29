@@ -12,12 +12,13 @@ import useAuthContext from "../../hooks/useAuthContext";
 import Swal from "sweetalert2";
 
 const Login = () => {
-  const { loginUser } = useAuthContext();
+  const { logInUser } = useAuthContext();
+  // console.log(logInUser);
   const location = useLocation();
   const navigate = useNavigate();
 
   const from = location.state?.from?.pathname || "/";
-  console.log(from)
+  console.log(from);
 
   const [disabled, setDisabled] = useState(true);
   useEffect(() => {
@@ -40,7 +41,7 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
     // console.log(email, password);
-    loginUser(email, password)
+    logInUser(email, password)
       .then((result) => {
         console.log(result.user);
         Swal.fire({
@@ -126,12 +127,12 @@ const Login = () => {
                     placeholder="fill the above captcha"
                     name="captcha"
                     className="input input-bordered"
-                    required
+                    // required
                   />
                 </div>
                 <div className="form-control mt-6">
                   <input
-                    disabled={disabled}
+                    disabled={false}
                     className="btn btn-primary"
                     type="submit"
                     value={"Login"}
