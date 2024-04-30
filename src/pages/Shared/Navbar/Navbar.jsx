@@ -84,10 +84,12 @@ const Navbar = () => {
         </ul>
         <div className="flex justify-center items-center text-xs md:text-sm font-semibold uppercase space-x-1 text-white">
           <p>
-            <Link to={"/"}>
+            <Link to={"/dashboard/carts"}>
               <button className="btn btn-sm">
                 <FaCartShopping></FaCartShopping>
-                <div className="badge badge-secondary text-xs">+{carts.length}</div>
+                <div className="badge badge-secondary text-xs">
+                  +{carts.length}
+                </div>
               </button>
             </Link>
           </p>

@@ -1,0 +1,40 @@
+import { NavLink, Outlet } from "react-router-dom";
+import DashLink from "./DashLink/DasLink";
+import { FaHome } from "react-icons/fa";
+
+const DashBoard = () => {
+  return (
+    <div className="flex">
+      {/* sidebar dashBoard */}
+      <div className="w-60 px-8 min-h-screen bg-orange-400">
+        <div className="uppercase text-center py-8">
+          <h3 className="font-bold text-lg md:text-2xl ">Bistro Boss</h3>
+          <p className="tracking-tight text-xs md:text-lg font-bold ">
+            R e s t a u r a n t
+          </p>
+        </div>
+        <ul className="flex flex-col space-y-4 ">
+          <DashLink></DashLink>
+          <div className="divider "></div>
+          <NavLink
+            className={({ isActive, isPending }) =>
+              isPending ? "pending" : isActive ? "activeCss" : "defaultCss"
+            }
+            to={"/"}
+          >
+            <span className="text-xl font-semibold">
+              <FaHome></FaHome>
+            </span>{" "}
+            Home
+          </NavLink>
+        </ul>
+      </div>
+      {/* dashboard outlet */}
+      <div className="flex-1">
+        <Outlet></Outlet>
+      </div>
+    </div>
+  );
+};
+
+export default DashBoard;
