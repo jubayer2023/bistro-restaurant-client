@@ -3,10 +3,13 @@ import NavItems from "./NavItems";
 import useAuthContext from "../../../hooks/useAuthContext";
 import Swal from "sweetalert2";
 import { FaCartShopping } from "react-icons/fa6";
+import useCarts from "../../../hooks/useCarts";
 
 const Navbar = () => {
   const { user, logOut } = useAuthContext();
   const navigate = useNavigate();
+  const [carts] = useCarts();
+  // console.log(carts);
 
   //   console.log(user);
   const handleLogOut = () => {
@@ -84,7 +87,7 @@ const Navbar = () => {
             <Link to={"/"}>
               <button className="btn btn-sm">
                 <FaCartShopping></FaCartShopping>
-                <div className="badge badge-secondary">+99</div>
+                <div className="badge badge-secondary text-xs">+{carts.length}</div>
               </button>
             </Link>
           </p>
