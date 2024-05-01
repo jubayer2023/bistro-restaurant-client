@@ -1,6 +1,6 @@
 import { NavLink, Outlet } from "react-router-dom";
 import DashLink from "./DashLink/DasLink";
-import { FaHome } from "react-icons/fa";
+import { FaEnvelope, FaHome } from "react-icons/fa";
 
 const DashBoard = () => {
   return (
@@ -26,6 +26,17 @@ const DashBoard = () => {
               <FaHome></FaHome>
             </span>{" "}
             Home
+          </NavLink>
+          <NavLink
+            className={({ isActive, isPending }) =>
+              isPending ? "pending" : isActive ? "activeCss" : "defaultCss"
+            }
+            to={"/"}
+          >
+            <span className="text-xl font-semibold">
+              <FaEnvelope></FaEnvelope>
+            </span>{" "}
+            Menu
           </NavLink>
         </ul>
       </div>

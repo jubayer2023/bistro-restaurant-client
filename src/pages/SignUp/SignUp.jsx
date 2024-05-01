@@ -6,11 +6,17 @@ import { useForm } from "react-hook-form";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import SocialLogin from "../Shared/SocialLogin/SocialLogin";
 
 const SignUp = () => {
   const { signUpUser, updateUserProfile } = useAuthContext();
   //   console.log(signUpUser);
+
+  const axiosPublic = useAxiosPublic();
+
   const navigate = useNavigate();
+
   const {
     register,
     reset,
@@ -25,24 +31,33 @@ const SignUp = () => {
         console.log(result.user);
         updateUserProfile(data.name, data.photoURL)
           .then(() => {
-            Swal.fire({
-              title: "Sign up  successfully!!",
-              showClass: {
-                popup: `
-                animate__animated
-                animate__fadeInUp
-                animate__faster
-              `,
-              },
-              hideClass: {
-                popup: `
-                animate__animated
-                animate__fadeOutDown
-                animate__faster
-              `,
-              },
+            // after updating user and creating user
+            const userInfo = {
+              email: data.email,
+              name: data.name,
+            };
+            axiosPublic.post("/users", userInfo).then((res) => {
+              if (res.data?.insertedId) {
+                Swal.fire({
+                  title: "Sign up  successfully!!",
+                  showClass: {
+                    popup: `
+                    animate__animated
+                    animate__fadeInUp
+                    animate__faster
+                  `,
+                  },
+                  hideClass: {
+                    popup: `
+                    animate__animated
+                    animate__fadeOutDown
+                    animate__faster
+                  `,
+                  },
+                });
+                navigate("/");
+              }
             });
-            navigate("/");
           })
           .catch((error) => {
             console.log(error);
@@ -176,6 +191,9 @@ const SignUp = () => {
                   />
                 </div>
               </form>
+              {/* socil login */}
+              <SocialLogin></SocialLogin>
+
               <p className="text-center">
                 <small className="text-xs font-semibold text-amber-500">
                   Already have an account ?{" "}

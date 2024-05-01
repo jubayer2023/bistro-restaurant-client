@@ -10,7 +10,7 @@ const Cart = () => {
   }, 0);
   console.log(totalPrice);
   return (
-    <div className="p-10">
+    <div className="p-10 ">
       <SectionTitle
         sectionHeading={"My Cart"}
         sectionText={"Wellecome to cart "}

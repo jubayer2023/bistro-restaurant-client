@@ -10,6 +10,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import useAuthContext from "../../hooks/useAuthContext";
 import Swal from "sweetalert2";
+import SocialLogin from "../Shared/SocialLogin/SocialLogin";
 
 const Login = () => {
   const { logInUser } = useAuthContext();
@@ -139,6 +140,8 @@ const Login = () => {
                   />
                 </div>
               </form>
+              {/* social Login */}
+              <SocialLogin></SocialLogin>
               <p className="text-center">
                 <small className="text-sm font-semibold text-red-600">
                   New here ?{" "}
