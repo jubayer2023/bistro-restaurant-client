@@ -1,15 +1,15 @@
 import Swal from "sweetalert2";
 import useAuthContext from "../../../hooks/useAuthContext";
 import { useLocation, useNavigate } from "react-router-dom";
-import useAxiosBaseURL from "../../../hooks/useAxiosBaseURL";
 import useCarts from "../../../hooks/useCarts";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const FoodCard = ({ item }) => {
   const { image, name, recipe, price, _id } = item;
   const { user } = useAuthContext();
   const navigate = useNavigate();
   const location = useLocation();
-  const axiosBaseURL = useAxiosBaseURL();
+  const axiosSecure = useAxiosSecure();
   const [, refetch] = useCarts();
 
   const handleAddToCart = () => {
@@ -24,7 +24,7 @@ const FoodCard = ({ item }) => {
         price,
       };
       // console.log(menuItem);
-      axiosBaseURL
+      axiosSecure
         .post("/carts", menuItem)
         .then((res) => {
           console.log(res.data);

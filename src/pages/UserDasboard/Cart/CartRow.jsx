@@ -1,10 +1,10 @@
 import { FaTrash } from "react-icons/fa6";
 import Swal from "sweetalert2";
-import useAxiosBaseURL from "../../../hooks/useAxiosBaseURL";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const CartRow = ({ item, index, refetch }) => {
   const { image, name, price, _id } = item;
-  const axiosBaseURL = useAxiosBaseURL();
+  const axiosSecure = useAxiosSecure();
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -17,7 +17,7 @@ const CartRow = ({ item, index, refetch }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosBaseURL
+        axiosSecure
           .delete(`/carts/${id}`)
           .then((res) => {
             // console.log(res.data);
