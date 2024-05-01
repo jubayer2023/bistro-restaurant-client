@@ -11,12 +11,14 @@ import { Helmet } from "react-helmet";
 import useAuthContext from "../../hooks/useAuthContext";
 import Swal from "sweetalert2";
 import SocialLogin from "../Shared/SocialLogin/SocialLogin";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const Login = () => {
   const { logInUser } = useAuthContext();
   // console.log(logInUser);
   const location = useLocation();
   const navigate = useNavigate();
+  const axiosPublic = useAxiosPublic();
 
   const from = location.state?.from?.pathname || "/";
   console.log(from);
@@ -45,24 +47,36 @@ const Login = () => {
     logInUser(email, password)
       .then((result) => {
         console.log(result.user);
-        Swal.fire({
-          title: "Login successfully!!",
-          showClass: {
-            popup: `
-              animate__animated
-              animate__fadeInUp
-              animate__faster
-            `,
-          },
-          hideClass: {
-            popup: `
-              animate__animated
-              animate__fadeOutDown
-              animate__faster
-            `,
-          },
-        });
-        navigate(from, { replace: true });
+        const userInfo = {
+          email: result?.user?.email,
+          name: result?.user?.displayName,
+        };
+        if (result?.user) {
+          axiosPublic.post("/users", userInfo).then((res) => {
+            if (res.data.insertedId) {
+              Swal.fire({
+                title: "Login successfully!!",
+                showClass: {
+                  popup: `
+                    animate__animated
+                    animate__fadeInUp
+                    animate__faster
+                  `,
+                },
+                hideClass: {
+                  popup: `
+                    animate__animated
+                    animate__fadeOutDown
+                    animate__faster
+                  `,
+                },
+              });
+              navigate(from, { replace: true });
+            } else {
+              navigate("/");
+            }
+          });
+        }
       })
       .catch((error) => {
         console.log(error);

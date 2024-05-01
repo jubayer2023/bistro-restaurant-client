@@ -12,7 +12,7 @@ const SocialLogin = () => {
     signInWithGoogle().then((result) => {
       const userInfo = {
         email: result?.user?.email,
-        name: result.user.displayName,
+        name: result?.user?.displayName,
       };
       axiosPublic
         .post("/users", userInfo)

@@ -1,88 +1,76 @@
-import { FaHome } from "react-icons/fa";
+import { FaAd, FaHome, FaUtensilSpoon } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import "./DashLink.css";
-import { FaCalendar } from "react-icons/fa6";
+import { FaBook, FaCalendar, FaList, FaUsers } from "react-icons/fa6";
 import { RiSecurePaymentFill } from "react-icons/ri";
 import { MdReviews } from "react-icons/md";
 import { TbBrandBooking } from "react-icons/tb";
 import { FaShoppingCart } from "react-icons/fa";
 
-const DashLink = () => {
+const AdminDashLink = () => {
   return (
     <>
       <NavLink
         className={({ isActive, isPending }) =>
           isPending ? "pending" : isActive ? "activeCss" : "defaultCss"
         }
-        to={"/"}
+        to={"/dashboard/adminHome"}
       >
         <span className="text-xl font-semibold">
           <FaHome></FaHome>
         </span>{" "}
-        User Home
+        Admin Home
       </NavLink>
 
       <NavLink
-        to={"/"}
+        to={"/dashboard/addItems"}
         className={({ isActive, isPending }) =>
           isPending ? "pending" : isActive ? "activeCss" : "defaultCss"
         }
       >
         <span className="text-xl font-semibold">
-          <FaCalendar></FaCalendar>
+          <FaUtensilSpoon></FaUtensilSpoon>
         </span>{" "}
-        Reservation
+        Add Items
       </NavLink>
 
       <NavLink
-        to={"/"}
+        to={"/dashboard/cart"}
         className={({ isActive, isPending }) =>
           isPending ? "pending" : isActive ? "activeCss" : "defaultCss"
         }
       >
         <span className="text-xl font-semibold">
-          <RiSecurePaymentFill></RiSecurePaymentFill>
+          <FaList></FaList>
         </span>{" "}
-        Payment History
+        Manage Items
       </NavLink>
 
       <NavLink
-        to={"/dashboard/carts"}
+        to={"/dashboard/bookings"}
         className={({ isActive, isPending }) =>
           isPending ? "pending" : isActive ? "activeCss" : "defaultCss"
         }
       >
         <span className="text-xl font-semibold">
-          <FaShoppingCart></FaShoppingCart>
+          <FaBook></FaBook>
         </span>{" "}
         My Cart
       </NavLink>
 
       <NavLink
-        to={"/"}
+        to={"/dashboard/users"}
         className={({ isActive, isPending }) =>
           isPending ? "pending" : isActive ? "activeCss" : "defaultCss"
         }
       >
         <span className="text-xl font-semibold">
-          <MdReviews></MdReviews>
+          <FaUsers></FaUsers>
         </span>{" "}
-        Add Review
+       All Users
       </NavLink>
-
-      <NavLink
-        to={"/"}
-        className={({ isActive, isPending }) =>
-          isPending ? "pending" : isActive ? "activeCss" : "defaultCss"
-        }
-      >
-        <span className="text-xl font-semibold">
-          <TbBrandBooking></TbBrandBooking>
-        </span>{" "}
-        My Bookings
-      </NavLink>
-    </>
+     </>
   );
 };
 
-export default DashLink;
+export default AdminDashLink;

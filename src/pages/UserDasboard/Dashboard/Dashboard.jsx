@@ -1,8 +1,11 @@
 import { NavLink, Outlet } from "react-router-dom";
-import DashLink from "./DashLink/DasLink";
 import { FaEnvelope, FaHome } from "react-icons/fa";
+import AdminDashLink from "./DashLink/AdminDashLink";
+import UserDashLink from "./DashLink/UserDashLink";
 
 const DashBoard = () => {
+  const isAdmin = true;
+
   return (
     <div className="flex">
       {/* sidebar dashBoard */}
@@ -14,7 +17,12 @@ const DashBoard = () => {
           </p>
         </div>
         <ul className="flex flex-col space-y-4 ">
-          <DashLink></DashLink>
+          {isAdmin ? (
+              <AdminDashLink></AdminDashLink>
+          ) : (
+            <UserDashLink></UserDashLink>
+          )}
+          {/* common dash link */}
           <div className="divider "></div>
           <NavLink
             className={({ isActive, isPending }) =>
