@@ -33,8 +33,7 @@ const AllUser = () => {
             // console.log(res.data);
             if (res.data.modifiedCount > 0) {
               Swal.fire({
-                title: "Deleted!",
-                text: "Your CartItem has been deleted.",
+                title: "Admin added!",
                 icon: "success",
               });
               refetch();

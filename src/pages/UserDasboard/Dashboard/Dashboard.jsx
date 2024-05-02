@@ -2,9 +2,10 @@ import { NavLink, Outlet } from "react-router-dom";
 import { FaEnvelope, FaHome } from "react-icons/fa";
 import AdminDashLink from "./DashLink/AdminDashLink";
 import UserDashLink from "./DashLink/UserDashLink";
+import useAdmin from "../../../hooks/useAdmin";
 
 const DashBoard = () => {
-  const isAdmin = true;
+  const [isAdmin] = useAdmin();
 
   return (
     <div className="flex">
@@ -18,7 +19,7 @@ const DashBoard = () => {
         </div>
         <ul className="flex flex-col space-y-4 ">
           {isAdmin ? (
-              <AdminDashLink></AdminDashLink>
+            <AdminDashLink></AdminDashLink>
           ) : (
             <UserDashLink></UserDashLink>
           )}

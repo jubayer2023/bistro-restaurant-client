@@ -1,11 +1,7 @@
-import { FaAd, FaHome, FaUtensilSpoon } from "react-icons/fa";
+import { FaHome, FaUtensilSpoon } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import "./DashLink.css";
-import { FaBook, FaCalendar, FaList, FaUsers } from "react-icons/fa6";
-import { RiSecurePaymentFill } from "react-icons/ri";
-import { MdReviews } from "react-icons/md";
-import { TbBrandBooking } from "react-icons/tb";
-import { FaShoppingCart } from "react-icons/fa";
+import { FaBook, FaList, FaUsers } from "react-icons/fa6";
 
 const AdminDashLink = () => {
   return (
@@ -67,9 +63,9 @@ const AdminDashLink = () => {
         <span className="text-xl font-semibold">
           <FaUsers></FaUsers>
         </span>{" "}
-       All Users
+        All Users
       </NavLink>
-     </>
+    </>
   );
 };
 
