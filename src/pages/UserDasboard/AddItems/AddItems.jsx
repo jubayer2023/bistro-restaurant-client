@@ -1,12 +1,35 @@
 import { useForm } from "react-hook-form";
 import SectionTitle from "../../Shared/SectionTitle/SectionTitle";
 import { FaUtensilSpoon } from "react-icons/fa";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
 
+// set images extra setting usin imgbb api
+const img_hosting_api_Key = import.meta.env.VITE_IMGBB_HOST_KEY;
+
+const img_hosting_api = `https://api.imgbb.com/1/upload?key=${img_hosting_api_Key}`;
+// console.log(img_hosting_api_Key)
 const AddItems = () => {
+  const axiosPublic = useAxiosPublic();
+
   const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => {
-    console.log(data.image[0].name);
+  const onSubmit = async (data) => {
+    try {
+      // console.log(data.image[0]);
+      console.log(data);
+      // post image to get imgbb live link
+      const imgFile = { image: data.image[0] };
+      const response = await axiosPublic.post(img_hosting_api, imgFile, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      console.log(response.data);
+    } catch (error) {
+      console.log("error from response: ", error);
+    }
   };
+
   return (
     <div className=" w-full min-h-screen">
       <SectionTitle
@@ -33,8 +56,9 @@ const AddItems = () => {
                 required
                 {...register("category")}
                 className="select select-secondary w-full max-w-xs"
+                defaultValue={"Pizza"}
               >
-                <option selected>Pizza</option>
+                <option value={"Pizza"}>Pizza</option>
                 <option>Salad</option>
                 <option>Drinks</option>
                 <option>Desserts</option>
