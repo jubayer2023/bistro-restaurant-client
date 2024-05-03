@@ -4,6 +4,7 @@ import { FaUtensilSpoon } from "react-icons/fa";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { useMenuHook } from "../../../hooks/useMenuHook";
 
 // set images extra setting usin imgbb api
 const img_hosting_api_Key = import.meta.env.VITE_IMGBB_HOST_KEY;
@@ -13,6 +14,8 @@ const img_hosting_api = `https://api.imgbb.com/1/upload?key=${img_hosting_api_Ke
 const AddItems = () => {
   const axiosPublic = useAxiosPublic();
   const axiosSecure = useAxiosSecure();
+
+  const [, , refetch] = useMenuHook();
 
   const { register, handleSubmit } = useForm();
   const onSubmit = async (data) => {
@@ -42,6 +45,7 @@ const AddItems = () => {
         console.log(menuResponse);
 
         if (menuResponse.data?.insertedId) {
+          refetch();
           Swal.fire({
             title: "Menu added successfully!!",
             showClass: {
@@ -96,11 +100,11 @@ const AddItems = () => {
                 className="select select-secondary w-full max-w-xs"
                 defaultValue={"Pizza"}
               >
-                <option value={"Pizza"}>Pizza</option>
-                <option>Salad</option>
-                <option>Drinks</option>
-                <option>Desserts</option>
-                <option>Soup</option>
+                <option value={"Pizza"}>pizza</option>
+                <option>salad</option>
+                <option>drinks</option>
+                <option>desserts</option>
+                <option>soup</option>
               </select>
             </div>
             {/* price */}

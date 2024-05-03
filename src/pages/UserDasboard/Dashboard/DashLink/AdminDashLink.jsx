@@ -1,7 +1,7 @@
-import { FaHome, FaUtensilSpoon } from "react-icons/fa";
+import { FaHome, } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import "./DashLink.css";
-import { FaBook, FaList, FaUsers } from "react-icons/fa6";
+import { FaBook, FaList, FaUsers, FaUtensils } from "react-icons/fa6";
 
 const AdminDashLink = () => {
   return (
@@ -25,13 +25,13 @@ const AdminDashLink = () => {
         }
       >
         <span className="text-xl font-semibold">
-          <FaUtensilSpoon></FaUtensilSpoon>
+          <FaUtensils></FaUtensils>
         </span>{" "}
         Add Items
       </NavLink>
 
       <NavLink
-        to={"/dashboard/cart"}
+        to={"/dashboard/manageItems"}
         className={({ isActive, isPending }) =>
           isPending ? "pending" : isActive ? "activeCss" : "defaultCss"
         }
