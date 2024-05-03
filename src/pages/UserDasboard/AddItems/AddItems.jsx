@@ -2,6 +2,8 @@ import { useForm } from "react-hook-form";
 import SectionTitle from "../../Shared/SectionTitle/SectionTitle";
 import { FaUtensilSpoon } from "react-icons/fa";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 // set images extra setting usin imgbb api
 const img_hosting_api_Key = import.meta.env.VITE_IMGBB_HOST_KEY;
@@ -10,6 +12,7 @@ const img_hosting_api = `https://api.imgbb.com/1/upload?key=${img_hosting_api_Ke
 // console.log(img_hosting_api_Key)
 const AddItems = () => {
   const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
 
   const { register, handleSubmit } = useForm();
   const onSubmit = async (data) => {
@@ -24,7 +27,42 @@ const AddItems = () => {
         },
       });
 
-      console.log(response.data);
+      // console.log(response.data.data);
+      if (response.data.success) {
+        const menuInfo = {
+          name: data.name,
+          price: parseFloat(data.price),
+          category: data.category,
+          recipe: data.recipe,
+          image: response.data.data.display_url,
+        };
+
+        // post postMenu
+        const menuResponse = await axiosSecure.post("/menu", menuInfo);
+        console.log(menuResponse);
+
+        if (menuResponse.data?.insertedId) {
+          Swal.fire({
+            title: "Menu added successfully!!",
+            showClass: {
+              popup: `
+              animate__animated
+              animate__fadeInUp
+              animate__faster
+            `,
+            },
+            hideClass: {
+              popup: `
+              animate__animated
+              animate__fadeOutDown
+              animate__faster
+            `,
+            },
+          });
+        }
+
+        // ////
+      }
     } catch (error) {
       console.log("error from response: ", error);
     }
@@ -79,11 +117,10 @@ const AddItems = () => {
           </div>
           <label className="form-control">
             <div className="label">
-              <span {...register("details")} className="label-text">
-                Recipe Details*
-              </span>
+              <span className="label-text">Recipe Details*</span>
             </div>
             <textarea
+              {...register("recipe")}
               className="textarea textarea-bordered h-24"
               placeholder="Recipe details"
             ></textarea>
