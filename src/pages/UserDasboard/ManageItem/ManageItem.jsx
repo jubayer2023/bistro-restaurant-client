@@ -4,6 +4,7 @@ import { FaEdit } from "react-icons/fa";
 import { useMenuHook } from "../../../hooks/useMenuHook";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { Link } from "react-router-dom";
 
 const ManageItem = () => {
   const [menus, , refetch] = useMenuHook();
@@ -77,9 +78,11 @@ const ManageItem = () => {
                   <td>{item.name}</td>
                   <td> $ {item.price}</td>
                   <td>
-                    <button className="btn btn-sm btn-warning">
-                      <FaEdit></FaEdit>
-                    </button>
+                    <Link to={`/dashboard/updateItem/${item._id}`}>
+                      <button className="btn btn-sm btn-warning">
+                        <FaEdit></FaEdit>
+                      </button>
+                    </Link>
                   </td>
                   <td>
                     <button

@@ -40,7 +40,7 @@ const DashBoard = () => {
             className={({ isActive, isPending }) =>
               isPending ? "pending" : isActive ? "activeCss" : "defaultCss"
             }
-            to={"/"}
+            to={"/menu"}
           >
             <span className="text-xl font-semibold">
               <FaEnvelope></FaEnvelope>
