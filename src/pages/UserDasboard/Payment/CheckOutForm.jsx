@@ -8,6 +8,7 @@ import useAuthContext from "../../../hooks/useAuthContext";
 const CheckOutForm = () => {
   const [err, setErr] = useState({});
   const [clientSecret, setClientSecret] = useState("");
+  const [transactionId, setTranactionId] = useState("");
   const stripe = useStripe();
   const elements = useElements();
   const axiosSecure = useAxiosSecure();
@@ -72,6 +73,10 @@ const CheckOutForm = () => {
       console.log("Payment confirm error", confirmError);
     } else {
       console.log("PaymentIntent : ", paymentIntent);
+      if (paymentIntent.status === "succeeded") {
+        setTranactionId(paymentIntent.id);
+        console.log("TransactionId: ", paymentIntent.id);
+      }
     }
   };
 
@@ -102,6 +107,9 @@ const CheckOutForm = () => {
         Pay
       </button>
       <p className="text-red-600 text-sm font-semibold ">{err.message}</p>
+      <p className="text-green-600 text-sm font-semibold ">
+        Your transactionId : {transactionId}
+      </p>
     </form>
   );
 };
