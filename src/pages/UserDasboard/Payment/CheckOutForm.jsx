@@ -2,6 +2,7 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useCarts from "../../../hooks/useCarts";
+import useAuthContext from "../../../hooks/useAuthContext";
 // import useAxiosPublic from "../../../hooks/useAxiosPublic";
 
 const CheckOutForm = () => {
@@ -10,6 +11,8 @@ const CheckOutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
   const axiosSecure = useAxiosSecure();
+  const { user } = useAuthContext();
+  console.log(user?.email);
   // const axiosPublic = useAxiosPublic();
   const [carts] = useCarts();
   const totalPrice = carts.reduce((total, item) => total + item.price, 0);
@@ -51,6 +54,24 @@ const CheckOutForm = () => {
     } else {
       console.log("PaymentMethod From Stripe : ", paymentMethod);
       setErr({});
+    }
+
+    // confirm card payment intent
+    const { paymentIntent, error: confirmError } =
+      await stripe.confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: card,
+          billing_details: {
+            email: user?.email || "anonymous",
+            name: user?.displayName || "anonymous",
+          },
+        },
+      });
+    // show the destuctured value from confirm paymentIntent
+    if (confirmError) {
+      console.log("Payment confirm error", confirmError);
+    } else {
+      console.log("PaymentIntent : ", paymentIntent);
     }
   };
 
