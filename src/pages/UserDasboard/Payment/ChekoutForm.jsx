@@ -1,13 +1,17 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useState } from "react";
 import useAuthContext from "../../../hooks/useAuthContext";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
-const CheckoutForm = ({ clientSecret }) => {
+const CheckoutForm = ({ refetch, carts, totalPrice, clientSecret }) => {
   const [payMethodError, setPayMethodError] = useState({});
   const [transactionId, setTransactionId] = useState("");
   const stripe = useStripe();
   const elements = useElements();
   const { user } = useAuthContext();
+  const axiosSecure = useAxiosSecure();
+
+  // console.log(carts, totalPrice);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -47,13 +51,31 @@ const CheckoutForm = ({ clientSecret }) => {
         },
       });
     // now check status
-    if (error) {
+    if (confirmError) {
       console.log("[ConfirmPaymentIntent Error : ]", confirmError);
     } else {
       console.log("[ConfirmPaymentIntent  : ]", paymentIntent);
       if (paymentIntent.status === "succeeded") {
         console.log("succedded", paymentIntent.id);
         setTransactionId(paymentIntent.id);
+
+        const paymentInfo = {
+          email: user?.email,
+          price: totalPrice,
+          // utc date convert , use momment js
+          date: new Date(),
+          cartIds: carts.map((item) => item._id),
+          oldIds: carts.map((item) => item.oldId),
+          transactionId: paymentIntent.id,
+          status: "pending",
+        };
+
+        // now post and delete from collection use db
+        const res = await axiosSecure.post("/payments", paymentInfo);
+        console.log("payment saved data :", res.data);
+        if (res.data.deletedCount > 0) {
+          refetch();
+        }
       }
     }
   };
@@ -92,7 +114,9 @@ const CheckoutForm = ({ clientSecret }) => {
         </p>
       )}
       {transactionId && (
-        <p className="text-green-600 text-sm font-semibold ">Your transactionId : {transactionId}</p>
+        <p className="text-green-600 text-sm font-semibold ">
+          Your transactionId : {transactionId}
+        </p>
       )}
     </form>
   );

@@ -65,7 +65,7 @@ export const router = createBrowserRouter([
         element: <Cart></Cart>,
       },
       {
-        path: "/dashboard/payment",
+        path: "/dashboard/carts/payment",
         element: <Payment></Payment>,
       },
       // admin routes

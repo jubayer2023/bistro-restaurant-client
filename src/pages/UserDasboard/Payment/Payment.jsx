@@ -11,20 +11,22 @@ const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PAYMENT_API_KEY);
 const Payment = () => {
   const [clientSecret, setClientSecret] = useState("");
   const axiosSecure = useAxiosSecure();
-  const [carts] = useCarts();
+  const [carts, refetch] = useCarts();
 
   const totalPrice = carts.reduce((total, item) => total + item.price, 0);
 
   useEffect(() => {
-    axiosSecure
-      .post("/create-payment-intent", { price: totalPrice })
-      .then((res) => {
-        console.log(res.data);
-        setClientSecret(res.data.clientSecret);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (totalPrice > 0) {
+      axiosSecure
+        .post("/create-payment-intent", { price: totalPrice })
+        .then((res) => {
+          console.log(res.data);
+          setClientSecret(res.data.clientSecret);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   }, [axiosSecure, totalPrice]);
 
   return (
@@ -37,7 +39,12 @@ const Payment = () => {
       <div className=" max-w-screen-md mt-12 mx-auto p-12 bg-neutral-200 ">
         {/* checkout form here */}
         <Elements stripe={stripePromise}>
-          <CheckoutForm clientSecret={clientSecret} />
+          <CheckoutForm
+            refetch={refetch}
+            carts={carts}
+            totalPrice={totalPrice}
+            clientSecret={clientSecret}
+          />
         </Elements>
       </div>
     </div>

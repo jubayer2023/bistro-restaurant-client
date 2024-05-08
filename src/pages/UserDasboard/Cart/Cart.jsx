@@ -22,8 +22,8 @@ const Cart = () => {
           <h3 className="text-3xl font-semibold ">
             Total Price: $ {totalPrice}
           </h3>
-          {carts.length ? (
-            <Link to={'/dashboard/payment'}>
+          {carts.length > 0 ? (
+            <Link to={"/dashboard/carts/payment"}>
               <button className="btn btn-sm btn-secondary">Pay</button>
             </Link>
           ) : (

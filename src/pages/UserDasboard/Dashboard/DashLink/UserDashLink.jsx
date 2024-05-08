@@ -4,8 +4,11 @@ import { MdReviews } from "react-icons/md";
 import { RiSecurePaymentFill } from "react-icons/ri";
 import { TbBrandBooking } from "react-icons/tb";
 import { NavLink } from "react-router-dom";
+import useCarts from "../../../../hooks/useCarts";
 
 const UserDashLink = () => {
+  const [carts] = useCarts();
+
   return (
     <>
       <NavLink
@@ -53,7 +56,7 @@ const UserDashLink = () => {
         <span className="text-xl font-semibold">
           <FaShoppingCart></FaShoppingCart>
         </span>{" "}
-        My Cart
+        My Cart ({carts.length})
       </NavLink>
 
       <NavLink
