@@ -43,7 +43,7 @@ const AdminDashLink = () => {
       </NavLink>
 
       <NavLink
-        to={"/dashboard/bookings"}
+        to={"/dashboard/carts"}
         className={({ isActive, isPending }) =>
           isPending ? "pending" : isActive ? "activeCss" : "defaultCss"
         }

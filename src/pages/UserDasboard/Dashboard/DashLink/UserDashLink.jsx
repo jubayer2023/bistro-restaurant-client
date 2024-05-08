@@ -36,7 +36,7 @@ const UserDashLink = () => {
       </NavLink>
 
       <NavLink
-        to={"/"}
+        to={"/dashboard/paymentHistory"}
         className={({ isActive, isPending }) =>
           isPending ? "pending" : isActive ? "activeCss" : "defaultCss"
         }
