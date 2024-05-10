@@ -15,7 +15,7 @@ const UserDashLink = () => {
         className={({ isActive, isPending }) =>
           isPending ? "pending" : isActive ? "activeCss" : "defaultCss"
         }
-        to={"/"}
+        to={"/dashboard/userHome"}
       >
         <span className="text-xl font-semibold">
           <FaHome></FaHome>

@@ -70,6 +70,8 @@ const CheckoutForm = ({ refetch, carts, totalPrice, clientSecret }) => {
           status: "pending",
         };
 
+        // console.log("[oldIds]:", oldIds, "[cartIds]:", cartIds);
+
         // now post and delete from collection use db
         const res = await axiosSecure.post("/payments", paymentInfo);
         console.log("payment saved data :", res.data);

@@ -11,7 +11,6 @@ import {
 } from "firebase/auth";
 import { app } from "../firebase/firebase.config";
 import useAxiosPublic from "../hooks/useAxiosPublic";
-const axiosPublic = useAxiosPublic();
 
 export const AuthContext = createContext(null);
 
@@ -20,6 +19,7 @@ const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const axiosPublic = useAxiosPublic();
 
   //   signup here
   const signUpUser = (email, password) => {
@@ -66,19 +66,20 @@ const AuthProvider = ({ children }) => {
           // console.log(res.data);
           if (res.data?.token) {
             localStorage.setItem("access_token", res.data.token);
+            setLoading(false);
           }
         });
       } else {
         // ?TODO something
         localStorage.removeItem("access_token");
+        setLoading(false);
       }
-      setLoading(false);
     });
 
     return () => {
       return unsubscribe();
     };
-  }, []);
+  }, [user?.email]);
 
   const authInfo = {
     user,
